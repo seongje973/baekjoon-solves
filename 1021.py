@@ -3,9 +3,9 @@ import sys
 def Direction(field, originlist, count):
   for i in range(len(field)):
     if field[i]==originlist[count]:
-      return 1
+      return (1,i)
     elif i>0 and field[-i]==originlist[count]:
-      return 0
+      return (0,i)
 
 def jiminpick(N,M):
   want=list(map(int,sys.stdin.readline().split()))
@@ -25,12 +25,14 @@ def jiminpick(N,M):
       field.popleft()
       count+=1
       continue
-    if Direction(field,originwant,count):
-      field.append(field.popleft())
-      order_count+=1
+    re=Direction(field,originwant,count)
+    if re[0]:
+      for k in range(re[1]):
+        field.append(field.popleft())
     else:
-      field.appendleft(field.pop())
-      order_count+=1
+      for k in range(re[1]):
+        field.appendleft(field.pop())
+    order_count+=re[1]
   return order_count
 
 if __name__=="__main__":
