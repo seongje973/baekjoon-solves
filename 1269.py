@@ -1,0 +1,5 @@
+An, Bn=map(int, input().split())
+aset=set(map(int,input().split()))
+bset=set(map(int,input().split()))
+result=len(aset-bset)+len(bset-aset)
+print(result)
